@@ -2,127 +2,112 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Movilidad UNAC | Oficial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SISTEMA DE REGISTRO UNAC</title>
     <style>
-        :root { 
-            --cyan-glow: #00e5ff;
-            --unac-blue: #002855;
-            --card-bg: #ffffff;
-        }
+        :root { --azul: #002855; --cyan: #00e5ff; --blanco: #ffffff; }
 
-        /* FONDO ESPACIAL VIBRANTE */
+        /* FONDO GALAXIA ALTO CONTRASTE */
         body { 
-            margin: 0; padding: 20px; min-height: 100vh;
+            margin: 0; padding: 15px; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
             font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: #050a14;
+            background: #02040a;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 40, 85, 0.5) 0%, transparent 50%),
-                url('https://www.transparenttextures.com/patterns/stardust.png');
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
             color: #333;
         }
 
-        .pantalla { width: 100%; max-width: 650px; display: none; flex-direction: column; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .pantalla { width: 100%; max-width: 600px; display: none; flex-direction: column; margin-top: 20px; }
 
+        /* CARDS ESTILO GOOGLE FORMS (100% OPACIDAD) */
         .card {
-            background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 12px; 
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            border-left: 10px solid var(--cyan-glow);
-            width: 100%; 
-            box-sizing: border-box;
+            background: var(--blanco); padding: 25px; border-radius: 10px; margin-bottom: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-left: 10px solid var(--cyan);
+            width: 100%; box-sizing: border-box;
         }
 
-        .header-main { border-top: 15px solid var(--unac-blue); border-left: none; text-align: center; }
-        .header-main h1 { color: var(--unac-blue); margin: 0; font-size: 2rem; }
+        .header-card { border-top: 15px solid var(--azul); border-left: none; text-align: center; }
+        .header-card h1 { color: var(--azul); margin: 0; font-size: 1.6rem; }
 
-        .reloj-container { 
-            text-align: center; color: white; padding: 50px; 
-            background: rgba(255,255,255,0.05); border-radius: 20px; 
-            border: 1px solid var(--cyan-glow); backdrop-filter: blur(5px);
+        /* CUENTA REGRESIVA */
+        .reloj-box { 
+            text-align: center; color: white; padding: 60px 20px; 
+            background: rgba(0,0,0,0.7); border-radius: 20px; 
+            border: 2px solid var(--cyan); box-shadow: 0 0 30px var(--cyan);
         }
-        #timer { font-size: 6rem; font-weight: 900; color: var(--cyan-glow); text-shadow: 0 0 20px var(--cyan-glow); }
+        #timer { font-size: 5.5rem; font-weight: 900; color: var(--cyan); font-family: monospace; }
 
-        .label-pregunta { display: block; margin-bottom: 15px; font-weight: 700; color: #202124; font-size: 1.1rem; }
-        
+        /* FORMULARIO ANTI-AUTOCUMPLETADO */
+        .label-p { display: block; margin-bottom: 10px; font-weight: 700; color: #202124; font-size: 1.1rem; }
         input[type="text"], select { 
             width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #ddd;
-            font-size: 1.1rem; outline: none; transition: 0.3s; background: transparent;
+            font-size: 1.1rem; outline: none; background: transparent; color: #000;
         }
-        input:focus { border-bottom: 2px solid var(--cyan-glow); }
+        input:focus { border-bottom: 2px solid var(--cyan); }
 
         .btn-enviar { 
-            width: 100%; padding: 20px; background: var(--unac-blue); color: white;
-            border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold;
-            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            width: 100%; padding: 20px; background: var(--azul); color: white;
+            border: none; border-radius: 8px; font-size: 1.3rem; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; margin-top: 10px;
         }
-        .btn-enviar:hover { background: var(--cyan-glow); color: var(--unac-blue); box-shadow: 0 0 20px var(--cyan-glow); }
 
-        .footer { text-align: center; color: rgba(255,255,255,0.6); font-size: 0.8rem; margin: 30px 0; font-weight: bold; }
+        .footer { text-align: center; color: rgba(255,255,255,0.7); font-size: 0.75rem; margin: 25px 0; font-weight: bold; }
     </style>
 </head>
-<body oncontextmenu="return false">
+<body oncontextmenu="return false" onselectstart="return false">
 
-    <div id="countdown-screen" class="pantalla">
-        <div class="reloj-container">
-            <h2 style="letter-spacing: 4px;">SISTEMA SE ACTIVA EN:</h2>
+    <div id="pantalla-reloj" class="pantalla">
+        <div class="reloj-box">
+            <h2 style="margin:0; letter-spacing: 2px;">EL REGISTRO INICIA EN:</h2>
             <div id="timer">00:00:00</div>
         </div>
-        <div class="footer">© 2026 UNAC - MOVILIDAD DE VENTANILLA | DELEGADO</div>
+        <div class="footer">© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .</div>
     </div>
 
-    <div id="form-screen" class="pantalla">
-        <div class="card header-main">
+    <div id="pantalla-form" class="pantalla">
+        <div class="card header-card">
             <h1>🚌 MOVILIDAD DE VENTANILLA 🚌</h1>
         </div>
 
         <div class="card" style="border-left-color: #ffc107;">
-            <p style="text-align: center; font-weight: bold;">‼️ LES MANDO MI SALUDO A TODOS USTEDES ‼️</p>
+            <p style="text-align: center;">‼️ <b>LES MANDO MI SALUDO A TODOS USTEDES</b> ‼️</p>
             <p>Les envío este <b>FORMULARIO</b> del día de hoy <b>15/04/2026</b> tendrá la capacidad de <b>40 personas</b> y el resto será mediante su cola respectivamente.</p>
-            <p><b>OJO: 👁‍🗨 QUE SUS DATOS DEBEN DE ESTAR CORRECTAMENTE CASO CONTRARIO EL SISTEMA LOS DETECTA Y NO LO VALIDARA.</b></p>
-            <p>Plazo para rellenar el formulario: <b>❕ 10 MINUTOS ❕</b></p>
-            <p>Una vez terminado el plazo, el sistema se encargará de verificar su datos que estén de manera correcta. ✅</p>
+            <p>OJO: 👁‍🗨<br><b>QUE SUS DATOS DEBEN DE ESTAR CORRECTAMENTE CASO CONTRARIO EL SISTEMA LOS DETECTA Y NO LO VALIDARA.</b></p>
+            <p>Por este motivo se les da plazo para poder rellenar el formulario: <b>❕ 10 MINUTOS ❕</b></p>
+            <p>Una vez terminado el plazo, el sistema se encargara de verificar su datos que esten de manera correcta. ✅</p>
             <p style="text-align: right;"><b>ATT. ADMINISTRATIVO (RUTA VENTANILLA)</b></p>
         </div>
 
-        <form id="registroForm" autocomplete="off">
+        <form id="formUnac" autocomplete="off">
             <div class="card">
-                <label class="label-pregunta">Nombres : (MINIMO 1 NOMBRE) ,RECUERDE:</label>
-                <input type="text" name="n_99" placeholder="Tu respuesta" required 
-                       readonly onfocus="this.removeAttribute('readonly');"
-                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <label class="label-p">Nombres : (MINIMO 1 NOMBRE) ,RECUERDE:</label>
+                <input type="text" name="nom_x" required readonly onfocus="this.removeAttribute('readonly');" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="label-pregunta">Apellidos: (RECUERDE QUE SON 2 APELLIDOS)</label>
-                <input type="text" name="a_99" placeholder="Tu respuesta" required 
-                       readonly onfocus="this.removeAttribute('readonly');"
-                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <label class="label-p">Apellidos: (RECUERDE QUE SON 2 APELLIDOS)</label>
+                <input type="text" name="ape_x" required readonly onfocus="this.removeAttribute('readonly');" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="label-pregunta">CODIGO DE ESTUDIANTE (OBLIGATORIO)</label>
-                <input type="text" name="c_99" placeholder="Tu respuesta" required 
-                       readonly onfocus="this.removeAttribute('readonly');"
-                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <label class="label-p">CODIGO DE ESTUDIANTE (OBLIGATORIO)</label>
+                <input type="text" name="cod_x" required readonly onfocus="this.removeAttribute('readonly');" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="label-pregunta">DNI:</label>
-                <input type="text" name="d_99" placeholder="Tu respuesta" required 
-                       readonly onfocus="this.removeAttribute('readonly');"
-                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <label class="label-p">DNI</label>
+                <input type="text" name="dni_x" required readonly onfocus="this.removeAttribute('readonly');" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="label-pregunta">FACULTAD:</label>
-                <select name="f_99" required>
-                    <option value="" disabled selected>Selecciona tu facultad</option>
+                <label class="label-p">FACULTAD:</label>
+                <select name="fac_x" required>
+                    <option value="" disabled selected>Elegir facultad</option>
                     <option value="FCC">FCC</option><option value="FCA">FCA</option><option value="FCE">FCE</option>
                     <option value="FIARN">FIARN</option><option value="FIQ">FIQ</option><option value="FCS">FCS</option>
                     <option value="FCED">FCED</option><option value="FIIS">FIIS</option><option value="FIME">FIME</option>
@@ -132,54 +117,60 @@
 
             <button type="submit" class="btn-enviar">ENVIAR REGISTRO</button>
         </form>
-        <div class="footer">© 2026 UNAC - MOVILIDAD DE VENTANILLA | DELEGADO</div>
+        <div class="footer">© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .</div>
     </div>
 
-    <div id="success-screen" class="pantalla">
+    <div id="pantalla-exito" class="pantalla">
         <div class="card" style="border-left-color: #4caf50;">
-            <h2>COMUNICADO</h2>
-            <p>Muchas gracias por completar el registro. El número de lista será enviado a su correo. 📩✨</p>
-            <p>¡Sigamos trabajando juntos! 🤝🚀<br><b>#SIGAMOSMEJORANDO</b></p>
-            <p><b>ATT. DELEGADO 🫡</b></p>
+            <p>Estimados,</p>
+            <p>Muchas gracias por completar el registro. Les informo que el <b>número de lista</b>, asignado según el orden en que llenaron el formulario, será enviado de forma personalizada al <b>correo electrónico</b> que proporcionaron en el mensaje de registro. 📩✨</p>
+            <p>Asimismo, estaré informando y resolviendo cualquier consulta o cambio respectivo a través del <b>GRUPO OFICIAL DE LA MOVILIDAD DE VENTANILLA</b>. 📱💬✅</p>
+            <p>¡Sigamos trabajando juntos por un mejor servicio! 🤝🚀<br><b>#SIGAMOSMEJORANDO</b> 📈</p>
+            <p>Gracias.<br><b>ATT. DELEGADO 🫡</b></p>
         </div>
+        <div class="footer">© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .</div>
     </div>
 
     <script>
-        // CONFIGURACIÓN DE LA HORA (14:40:00)
-        function startTimer() {
-            const target = new Date();
-            target.setHours(14, 40, 0, 0); 
+        // CONFIGURACIÓN HORA: 14:45 PM (Hoy 17 de Abril 2026)
+        const targetTime = new Date();
+        targetTime.setHours(14, 45, 0, 0);
 
-            function update() {
-                const now = new Date();
-                const diff = target - now;
+        function updateClock() {
+            const now = new Date();
+            const diff = targetTime - now;
 
-                if (diff <= 0) {
-                    document.getElementById('countdown-screen').style.display = 'none';
-                    document.getElementById('form-screen').style.display = 'flex';
-                } else {
-                    document.getElementById('countdown-screen').style.display = 'flex';
-                    const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
-                    const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-                    const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-                    document.getElementById('timer').innerText = `${h}:${m}:${s}`;
-                    requestAnimationFrame(update);
-                }
+            if (diff <= 0) {
+                document.getElementById('pantalla-reloj').style.display = 'none';
+                document.getElementById('pantalla-form').style.display = 'flex';
+            } else {
+                document.getElementById('pantalla-reloj').style.display = 'flex';
+                const h = Math.floor(diff/3600000).toString().padStart(2,'0');
+                const m = Math.floor((diff%3600000)/60000).toString().padStart(2,'0');
+                const s = Math.floor((diff%60000)/1000).toString().padStart(2,'0');
+                document.getElementById('timer').innerText = `${h}:${m}:${s}`;
+                requestAnimationFrame(updateClock);
             }
-            update();
         }
 
-        // BLOQUEO TOTAL DE PEGADO (Mobile + Desktop)
+        // BLOQUEO DE PEGADO Y AUTO-COMPLETE AGRESIVO
         document.addEventListener('paste', e => e.preventDefault());
-
-        document.getElementById('registroForm').onsubmit = function(e) {
-            e.preventDefault();
-            document.getElementById('form-screen').style.display = 'none';
-            document.getElementById('success-screen').style.display = 'flex';
-            window.scrollTo(0,0);
+        
+        // Evitar que el navegador intente recordar datos al cargar
+        window.onload = () => {
+            const forms = document.getElementsByTagName('form');
+            for (let i = 0; i < forms.length; i++) {
+                forms[i].reset();
+            }
+            updateClock();
         };
 
-        window.onload = startTimer;
+        document.getElementById('formUnac').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('pantalla-form').style.display = 'none';
+            document.getElementById('pantalla-exito').style.display = 'flex';
+            window.scrollTo(0,0);
+        };
     </script>
 </body>
 </html>
