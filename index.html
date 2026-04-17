@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Movilidad Ventanilla | Registro Oficial</title>
+    <style>
+        /* Restricción de selección de texto a nivel CSS */
+        body { 
+            background-color: #0d1117; 
+            color: #fff; 
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            height: 100vh; 
+            margin: 0;
+            user-select: none; /* Bloquea selección */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* --- PANTALLA DE CONTADOR --- */
+        #countdown-area { text-align: center; }
+        .main-title { font-size: 4rem; font-weight: 900; color: #ffb400; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
+        .subtitle { font-size: 1.2rem; color: #8b949e; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        #timer { font-size: 8rem; font-weight: 900; letter-spacing: -2px; color: #fff; margin-top: 20px; text-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+        
+        /* --- TARJETA DE COMUNICADO FORMAL --- */
+        .gold-card { 
+            display: none; 
+            background: linear-gradient(135deg, #c7a047, #fdf8c8, #c19634, #fdf8c8, #b68523);
+            padding: 40px 50px; 
+            border-radius: 12px; 
+            color: #1a1a1a; 
+            max-width: 650px; 
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 8px rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .gold-card h2 { text-align: center; font-size: 1.6rem; margin-top: 0; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15px; }
+        .formal-text { text-align: left; font-size: 1.05rem; line-height: 1.7; }
+        .requirements-list { margin: 15px 0 20px 20px; padding: 0; }
+        .warning-box { background: rgba(0,0,0,0.06); padding: 20px; border-left: 4px solid #1a1a1a; margin: 25px 0; font-size: 0.95rem; text-align: justify; }
+        .btn { background: #1a1a1a; color: #fff; padding: 18px 35px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-block; transition: all 0.3s ease; }
+        .btn:hover { transform: translateY(-3px); background: #000; }
+        .signature { text-align: right; margin-top: 30px; font-style: italic; }
+    </style>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+
+    <div id="countdown-area">
+        <h1 class="main-title">Movilidad Ventanilla</h1>
+        <p class="subtitle">Apertura del registro del formulario oficial</p>
+        <div id="timer">00:00:00</div>
+    </div>
+
+    <div class="gold-card" id="form-message">
+        <h2>Comunicado Oficial</h2>
+        <div class="formal-text">
+            <p>Estimada comunidad estudiantil,</p>
+            <p>Se informa que el padrón de registro para el servicio de movilidad correspondiente al día de hoy, <b>15 de abril de 2026</b>, está habilitado.</p>
+            <p><b>Condiciones obligatorias:</b></p>
+            <ul class="requirements-list">
+                <li>Uso exclusivo de su <b>correo institucional</b>.</li>
+                <li>Aforo máximo: <b>40 estudiantes</b>.</li>
+            </ul>
+            <div class="warning-box">
+                <b>AVISO:</b> El protocolo de abordaje inicia a las <b>5:15 PM</b>. La ausencia conlleva a la pérdida del cupo.
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://forms.gle/RAKDr58bv7A8893z8" class="btn" target="_blank">ACCEDER AL FORMULARIO</a>
+        </div>
+        <div class="signature">Atentamente, <b>Delegatura de Ruta Ventanilla</b></div>
+    </div>
+
+    <script>
+        // Bloqueo adicional para evitar inspección por teclado
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+                return false;
+            }
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const target = new Date();
+            target.setHours(17, 00, 0, 0);
+
+            if (now >= target) {
+                document.getElementById('countdown-area').style.display = 'none';
+                document.getElementById('form-message').style.display = 'block';
+                return;
+            }
+
+            const diff = target - now;
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('timer').innerHTML = 
+                `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
