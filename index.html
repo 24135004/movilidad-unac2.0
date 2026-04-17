@@ -88,12 +88,11 @@
         .q-desc { font-size: 0.85rem; color: #5f6368; margin-bottom: 15px; display: block; }
         
         /* INPUTS - AQUÍ PERMITIMOS ESCRITURA PERO NO COPIADO */
-        input[type="text"], input[type="email"] { 
-            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #dadce0;
-            font-size: 1.1rem; outline: none; background: transparent; transition: 0.3s;
-            -webkit-user-select: text; user-select: text; /* Permite escribir pero las funciones de arriba bloquean pegar */
-        }
-        input:focus { border-bottom: 2px solid var(--azul-u); }
+       <input type="text" name="r1" required onpaste="return false;" oncopy="return false;" autocomplete="off" data-lpignore="true" placeholder="Tu respuesta">
+
+<input type="text" name="r2" required onpaste="return false;" oncopy="return false;" autocomplete="off" data-lpignore="true" placeholder="Tu respuesta">
+
+<input type="email" id="correo-estudiante" name="r3" required onpaste="return false;" autocomplete="off" data-lpignore="true" placeholder="ejemplo@unac.edu.pe">
 
         .radio-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
