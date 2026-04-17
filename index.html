@@ -115,49 +115,49 @@
             <p style="text-align: right; margin-top: 20px;"><em>ATT. ADMINISTRATIVO (RUTA VENTANILLA)</em></p>
         </div>
 
-        <form id="registroForm" autocomplete="off" spellcheck="false" style="width: 100%;">
+        <form id="registroForm" autocomplete="on" spellcheck="false" style="width: 100%;">
             
-            <div class="card-blanca question-card">
-                <label>👤 Nombres : (MINIMO 1 NOMBRE) ,RECUERDE:</label>
-                <input type="text" name="n_u_1" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
-            </div>
+    <div class="card-blanca question-card">
+        <label>👤 Nombres : (MINIMO 1 NOMBRE) ,RECUERDE:</label>
+        <input type="text" name="nombres" placeholder="Tu respuesta" autocomplete="given-name" required>
+    </div>
 
-            <div class="card-blanca question-card">
-                <label>📋 Apellidos: (RECUERDE QUE SON 2 APELLIDOS)</label>
-                <input type="text" name="n_u_2" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
-            </div>
+    <div class="card-blanca question-card">
+        <label>📋 Apellidos: (RECUERDE QUE SON 2 APELLIDOS)</label>
+        <input type="text" name="apellidos" placeholder="Tu respuesta" autocomplete="family-name" required>
+    </div>
 
-            <div class="card-blanca question-card">
-                <label>🎓 CODIGO DE ESTUDIANTE (OBLIGATORIO)</label>
-                <input type="text" name="n_u_3" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
-            </div>
+    <div class="card-blanca question-card">
+        <label>🎓 CODIGO DE ESTUDIANTE (OBLIGATORIO)</label>
+        <input type="text" name="codigo" placeholder="Tu respuesta" autocomplete="off" required>
+    </div>
 
-            <div class="card-blanca question-card">
-                <label>🆔 DNI</label>
-                <input type="text" name="n_u_4" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
-            </div>
+    <div class="card-blanca question-card">
+        <label>🆔 DNI</label>
+        <input type="text" name="dni" placeholder="Tu respuesta" autocomplete="off" required>
+    </div>
 
-            <div class="card-blanca question-card">
-                <label>🏛️ Facultad a la que perteneces:</label>
-                <select name="facultad" required>
-                    <option value="">Despliega y selecciona...</option>
-                    <option value="FCC">FCC - Facultad de Ciencias Contables</option>
-                    <option value="FCA">FCA - Facultad de Ciencias Administrativas</option>
-                    <option value="FCE">FCE - Facultad de Ciencias Económicas</option>
-                    <option value="FIARN">FIARN - Fac. Ing. Ambiental y de Recursos Naturales</option>
-                    <option value="FIQ">FIQ - Facultad de Ingeniería Química</option>
-                    <option value="FCS">FCS - Facultad de Ciencias de la Salud</option>
-                    <option value="FCED">FCED - Facultad de Ciencias y Educación</option>
-                    <option value="FIIS">FIIS - Facultad de Ing. Industrial y de Sistemas</option>
-                    <option value="FIME">FIME - Facultad de Ing. Mecánica y de Energía</option>
-                    <option value="FIPA">FIPA - Facultad de Ing. Pesquera y de Alimentos</option>
-                    <option value="FCNM">FCNM - Facultad de Ciencias Naturales y Matemática</option>
-                    <option value="FIEE">FIEE - Facultad de Ing. Eléctrica y Electrónica</option>
-                </select>
-            </div>
+    <div class="card-blanca question-card">
+        <label>🏛️ Facultad a la que perteneces:</label>
+        <select name="facultad" required autocomplete="organization">
+            <option value="">Despliega y selecciona...</option>
+            <option value="FCC">FCC - Facultad de Ciencias Contables</option>
+            <option value="FCA">FCA - Facultad de Ciencias Administrativas</option>
+            <option value="FCE">FCE - Facultad de Ciencias Económicas</option>
+            <option value="FIARN">FIARN - Fac. Ing. Ambiental y de Recursos Naturales</option>
+            <option value="FIQ">FIQ - Facultad de Ingeniería Química</option>
+            <option value="FCS">FCS - Facultad de Ciencias de la Salud</option>
+            <option value="FCED">FCED - Facultad de Ciencias y Educación</option>
+            <option value="FIIS">FIIS - Facultad de Ing. Industrial y de Sistemas</option>
+            <option value="FIME">FIME - Facultad de Ing. Mecánica y de Energía</option>
+            <option value="FIPA">FIPA - Facultad de Ing. Pesquera y de Alimentos</option>
+            <option value="FCNM">FCNM - Facultad de Ciencias Naturales y Matemática</option>
+            <option value="FIEE">FIEE - Facultad de Ing. Eléctrica y Electrónica</option>
+        </select>
+    </div>
 
-            <button type="submit" class="btn">✨ Enviar</button>
-        </form>
+    <button type="submit" class="btn">✨ Enviar</button>
+</form>
         <div class="footer-copy">(© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .)</div>
     </div>
 
