@@ -2,145 +2,88 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Movilidad Ventanilla | Registro Oficial</title>
+    <title>Movilidad Ventanilla | Registro</title>
     <style>
-        body { 
-            background-color: #0d1117; 
-            color: #fff; 
-            font-family: 'Inter', -apple-system, sans-serif;
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center;
-            height: 100vh; 
-            margin: 0;
-            /* Bloqueo visual de selección */
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        #countdown-area { text-align: center; }
-        .main-title { font-size: 4rem; font-weight: 900; color: #ffb400; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
-        #timer { font-size: 8rem; font-weight: 900; color: #fff; margin-top: 20px; }
+        body { background-color: #0d1117; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; user-select: none; }
         
-        .gold-card { 
-            display: none; 
-            background: linear-gradient(135deg, #c7a047, #fdf8c8, #c19634, #fdf8c8, #b68523);
-            padding: 30px 40px; 
-            border-radius: 12px; 
-            color: #1a1a1a; 
-            max-width: 550px; 
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
+        /* Contador */
+        #countdown-container { text-align: center; }
+        #timer { font-size: 5rem; font-weight: 900; color: #ffb400; }
+        
+        /* Formulario */
+        .gold-card { display: none; background: linear-gradient(135deg, #c7a047, #fdf8c8, #c19634); padding: 30px; border-radius: 12px; color: #1a1a1a; max-width: 500px; width: 90%; }
         .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-size: 0.85rem; }
-        .form-group input { 
-            width: 100%; 
-            padding: 10px; 
-            border-radius: 5px; 
-            border: 1px solid rgba(0,0,0,0.2); 
-            box-sizing: border-box;
-        }
-
-        .btn {
-            background: #1a1a1a; color: #fff; padding: 15px; border-radius: 8px;
-            text-decoration: none; font-weight: 700; display: block; width: 100%;
-            border: none; cursor: pointer; margin-top: 20px;
-        }
-        
-        #success-msg { display: none; text-align: center; font-weight: bold; padding: 20px; }
+        .form-group label { display: block; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+        input, select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #000; box-sizing: border-box; }
+        .btn { background: #1a1a1a; color: #fff; padding: 15px; border-radius: 8px; border: none; width: 100%; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
-    <div id="countdown-area">
-        <h1 class="main-title">Movilidad Ventanilla</h1>
-        <p style="color: #8b949e;">APERTURA DE REGISTRO EN:</p>
-        <div id="timer">00:01:00</div>
+    <div id="countdown-container">
+        <h1>APERTURA DE REGISTRO</h1>
+        <div id="timer">00:00:00</div>
     </div>
 
     <div class="gold-card" id="form-container">
-        <h2 style="text-align:center; margin-top:0;">REGISTRO OFICIAL</h2>
-        
-        <form id="registroForm">
-            <div class="form-group">
-                <label>Nombres y Apellidos:</label>
-                <input type="text" name="nombres" required>
+        <h2 style="text-align:center;">REGISTRO OFICIAL</h2>
+        <form id="registroForm" autocomplete="off">
+            <div class="form-group"><label>Nombres:</label><input type="text" name="nombres" autocomplete="off" required></div>
+            <div class="form-group"><label>Apellidos:</label><input type="text" name="apellidos" autocomplete="off" required></div>
+            <div class="form-group"><label>Código Estudiantil:</label><input type="text" name="codigo" autocomplete="off" required></div>
+            <div class="form-group"><label>DNI:</label><input type="text" name="dni" autocomplete="off" required></div>
+            <div class="form-group"><label>Facultad:</label>
+                <select name="facultad" required>
+                    <option value="">Seleccione...</option>
+                    <option value="FCC">FCC</option><option value="FCA">FCA</option><option value="FCE">FCE</option>
+                    <option value="FIARN">FIARN</option><option value="FIQ">FIQ</option><option value="FCS">FCS</option>
+                    <option value="FCED">FCED</option><option value="FIIS">FIIS</option><option value="FIME">FIME</option>
+                    <option value="FIPA">FIPA</option><option value="FCNM">FCNM</option><option value="FIEE">FIEE</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label>Código Estudiantil / DNI:</label>
-                <input type="text" name="codigo" required>
-            </div>
-            <div class="form-group">
-                <label>Correo Institucional:</label>
-                <input type="email" name="email" required>
-            </div>
-            
-            <button type="submit" id="submitBtn" class="btn">ENVIAR REGISTRO</button>
+            <button type="submit" id="btnSubmit" class="btn">ENVIAR REGISTRO</button>
         </form>
-
-        <div id="success-msg">
-            <p>✅ ¡Registro enviado con éxito!</p>
-            <p>Verifica tu bandeja de entrada para tu número de asiento.</p>
-        </div>
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx09FrHgU9pDcd-mRVCXvvVhVaOcM8EcPNbx3l74Z3JGFFohFpOuN9FdK5RquHN_Df0WA/exec';
+        const SCRIPT_URL = 'TU_URL_AQUI'; 
 
-        // 1. Lógica del Contador
+        // 1. Contador
         function updateTimer() {
             const now = new Date();
             const target = new Date();
-            target.setHours(12, 39, 0, 0); // Configurado a las 5:00 PM
+            target.setHours(12, 47, 0, 0); // Ajusta la hora de apertura
 
             if (now >= target) {
-                document.getElementById('countdown-area').style.display = 'none';
+                document.getElementById('countdown-container').style.display = 'none';
                 document.getElementById('form-container').style.display = 'block';
-                return;
+            } else {
+                const diff = target - now;
+                const h = Math.floor(diff/3600000).toString().padStart(2,'0');
+                const m = Math.floor((diff%3600000)/60000).toString().padStart(2,'0');
+                const s = Math.floor((diff%60000)/1000).toString().padStart(2,'0');
+                document.getElementById('timer').innerText = `${h}:${m}:${s}`;
             }
-
-            const diff = target - now;
-            const h = Math.floor(diff / 3600000).toString().padStart(2,'0');
-            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
-            const s = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
-            document.getElementById('timer').innerText = `${h}:${m}:${s}`;
         }
         setInterval(updateTimer, 1000);
-        updateTimer();
 
-        // 2. Envío de datos al Excel (Apps Script)
+        // 2. Envío y Seguridad
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('paste', e => e.preventDefault());
+        
         document.getElementById('registroForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "REGISTRANDO...";
+            const btn = document.getElementById('btnSubmit');
+            btn.innerText = "ENVIANDO...";
             btn.disabled = true;
 
-            fetch(SCRIPT_URL, { 
-                method: 'POST', 
-                mode: 'no-cors', 
-                body: new FormData(this) 
-            })
+            fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: new FormData(this) })
             .then(() => {
-                document.getElementById('registroForm').style.display = 'none';
-                document.getElementById('success-msg').style.display = 'block';
+                alert("Registro enviado exitosamente.");
+                location.reload();
             })
-            .catch(() => {
-                alert("Error de conexión. Inténtalo de nuevo.");
-                btn.disabled = false;
-                btn.innerText = "ENVIAR REGISTRO";
-            });
+            .catch(() => alert("Error al registrar."));
         });
-
-        // 3. Bloqueos de teclado (F12, Ctrl+U, Ctrl+C, Ctrl+V)
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || 
-                (e.ctrlKey && (e.keyCode == 67 || e.keyCode == 86 || e.keyCode == 85 || e.keyCode == 73))) {
-                return false;
-            }
-        };
     </script>
 </body>
 </html>
