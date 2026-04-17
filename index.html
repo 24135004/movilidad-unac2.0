@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>REGISTRO OFICIAL - MOVILIDAD UNAC</title>
     <style>
-        :root { --azul-u: #002855; --celeste-u: #00e5ff; --blanco: #ffffff; }
+        :root { 
+            --azul-u: #002855; 
+            --celeste-u: #00e5ff; 
+            --blanco: #ffffff; 
+            --error: #d93025;
+            --exito: #1e8e3e;
+        }
 
-        /* FONDO ESPACIAL COMPLETO CON ANIMACIÓN */
+        /* FONDO DINÁMICO ANIMADO */
         body { 
             margin: 0; padding: 20px; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
-            font-family: 'Arial', sans-serif;
-            background: #00050a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #00050a, #002855, #001a33, #003366);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #333; overflow-x: hidden;
-            user-select: none; -webkit-user-select: none;
         }
 
-        /* Capas de Galaxia */
-        .stars {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            z-index: -1; opacity: 0.4;
-        }
-        .nebula {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.1), transparent 40%),
-                        radial-gradient(circle at 80% 70%, rgba(0, 40, 85, 0.4), transparent 50%);
-            z-index: -2;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Pantallas */
@@ -35,53 +35,76 @@
 
         /* CUENTA REGRESIVA IMPACTANTE */
         .timer-card { 
-            text-align: center; color: white; padding: 60px 20px; 
-            background: rgba(0, 0, 0, 0.8); border: 3px solid var(--celeste-u);
-            border-radius: 25px; box-shadow: 0 0 50px var(--celeste-u);
+            text-align: center; color: white; padding: 50px 20px; 
+            background: rgba(0, 0, 0, 0.6); border: 2px solid var(--celeste-u);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
         }
-        #reloj { font-size: 6.5rem; font-weight: 900; color: var(--celeste-u); font-family: 'Courier New', monospace; text-shadow: 0 0 20px var(--celeste-u); }
+        #reloj { font-size: 5rem; font-weight: 900; color: var(--celeste-u); font-family: 'Courier New', monospace; text-shadow: 0 0 15px var(--celeste-u); }
+        @media (max-width: 480px) { #reloj { font-size: 3.5rem; } }
 
         /* ESTILO GOOGLE FORMS PROFESIONAL */
         .card {
-            background: var(--blanco); padding: 30px; border-radius: 12px; margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); border-left: 10px solid var(--celeste-u);
-            width: 100%; box-sizing: border-box;
+            background: var(--blanco); padding: 25px 30px; border-radius: 12px; margin-bottom: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); border-left: 8px solid var(--celeste-u);
+            width: 100%; box-sizing: border-box; transition: transform 0.2s;
         }
-        .header-top { border-top: 15px solid var(--azul-u); border-left: none; text-align: center; }
-        .header-top h1 { color: var(--azul-u); margin: 0; font-size: 2.2rem; }
+        .card:hover { transform: translateY(-2px); }
+        .header-top { border-top: 12px solid var(--azul-u); border-left: none; text-align: center; }
+        .header-top h1 { color: var(--azul-u); margin: 0; font-size: 2rem; }
 
         /* PREGUNTAS */
-        .q-label { display: block; margin-bottom: 15px; font-weight: 800; color: #202124; font-size: 1.15rem; }
+        .q-label { display: block; margin-bottom: 10px; font-weight: 700; color: #202124; font-size: 1.1rem; }
+        .q-desc { font-size: 0.85rem; color: #5f6368; margin-bottom: 15px; display: block; }
         
-        /* INPUTS ANTI-TRUCOS */
-        input[type="text"], select { 
-            width: 100%; padding: 15px 0; border: none; border-bottom: 2px solid #ccc;
-            font-size: 1.2rem; outline: none; background: transparent; transition: 0.3s;
-            color: #000;
+        /* INPUTS MODERNOS */
+        input[type="text"], input[type="email"] { 
+            width: 100%; padding: 12px 5px; border: none; border-bottom: 2px solid #dadce0;
+            font-size: 1.1rem; outline: none; background: transparent; transition: 0.3s;
+            color: #202124; box-sizing: border-box;
         }
-        input:focus { border-bottom: 3px solid var(--celeste-u); }
+        input:focus { border-bottom: 2px solid var(--azul-u); }
+        input:invalid:focus { border-bottom: 2px solid var(--error); }
+
+        /* GRILLA DE FACULTADES (RADIO BUTTONS) */
+        .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .radio-label {
+            display: flex; align-items: center; cursor: pointer;
+            font-size: 1rem; color: #202124;
+        }
+        .radio-label input { margin-right: 10px; transform: scale(1.2); accent-color: var(--azul-u); }
 
         .btn-send { 
-            width: 100%; padding: 22px; background: var(--azul-u); color: white;
-            border: none; border-radius: 10px; font-size: 1.3rem; font-weight: bold;
+            width: 100%; padding: 18px; background: var(--azul-u); color: white;
+            border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold;
             cursor: pointer; text-transform: uppercase; transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin-top: 10px;
         }
-        .btn-send:hover { background: var(--celeste-u); transform: scale(1.02); box-shadow: 0 0 20px var(--celeste-u); }
+        .btn-send:hover { background: #003b7a; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 40, 85, 0.5); }
+        .btn-send:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .foot-info { text-align: center; color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 30px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .foot-info { text-align: center; color: rgba(255,255,255,0.8); font-size: 0.8rem; margin-top: 25px; font-weight: bold; letter-spacing: 1px; }
+        
+        /* INDICADOR DE CUPOS */
+        .cupos-badge {
+            background: #fbbc04; color: #000; padding: 5px 15px; border-radius: 20px;
+            font-weight: bold; display: inline-block; margin-top: 10px;
+        }
     </style>
 </head>
 <body oncontextmenu="return false">
 
-    <div class="stars"></div>
-    <div class="nebula"></div>
-
     <div id="pantalla-reloj" class="container">
         <div class="timer-card">
-            <h2 style="margin:0; letter-spacing: 3px;">EL FORMULARIO SE ABRE EN:</h2>
+            <h2 style="margin:0; letter-spacing: 2px; font-size: 1.5rem;">EL FORMULARIO SE ABRE EN:</h2>
             <div id="reloj">00:00:00</div>
         </div>
-        <div class="foot-info">© 2026 UNAC - MOVILIDAD DE VENTANILLA | CREADO POR EL DELEGADO</div>
+        <div class="foot-info">© 2026 UNAC - MOVILIDAD DE VENTANILLA</div>
     </div>
 
     <div id="pantalla-form" class="container">
@@ -90,84 +113,93 @@
         </div>
 
         <div class="card" style="border-left-color: #fbbc04;">
-            <p style="text-align: center; font-weight: bold;">‼️ SALUDO A TODOS LOS ESTUDIANTES ‼️</p>
-            <p>Este es el registro oficial del día <b>15/04/2026</b>. Capacidad máxima: <b>40 personas</b>.</p>
+            <p style="text-align: center; font-weight: bold; font-size: 1.2rem;">‼️ SALUDO A TODOS LOS ESTUDIANTES ‼️</p>
+            <p>Este es el registro oficial del día <b>15/04/2026</b>.</p>
+            <div style="text-align: center;"><span class="cupos-badge">CUPOS DISPONIBLES: <span id="contador-cupos">41</span>/41</span></div>
             <p><b>ADVERTENCIA:</b> Datos incorrectos resultarán en la anulación del registro. El sistema audita cada respuesta.</p>
-            <p>Plazo máximo: <b>10 MINUTOS</b>.</p>
-            <p style="text-align: right;"><b>ATT. RUTA VENTANILLA</b></p>
+            <p style="text-align: right; color: var(--azul-u);"><b>ATT. RUTA VENTANILLA</b></p>
         </div>
 
         <form id="unacForm" autocomplete="off">
+            
             <div class="card">
-                <label class="q-label">Nombres : (MINIMO 1 NOMBRE)</label>
-                <input type="text" name="field_nom" required readonly 
-                       onfocus="this.removeAttribute('readonly');" 
-                       autocomplete="new-password" placeholder="Tu respuesta">
+                <label class="q-label">Nombres:</label>
+                <span class="q-desc">Mínimo 1 nombre</span>
+                <input type="text" name="field_nom" required readonly onfocus="this.removeAttribute('readonly');" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="q-label">Apellidos: (COMPLETOS)</label>
-                <input type="text" name="field_ape" required readonly 
-                       onfocus="this.removeAttribute('readonly');" 
-                       autocomplete="new-password" placeholder="Tu respuesta">
+                <label class="q-label">Apellidos:</label>
+                <span class="q-desc">Completos</span>
+                <input type="text" name="field_ape" required readonly onfocus="this.removeAttribute('readonly');" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="q-label">CÓDIGO DE ESTUDIANTE:</label>
-                <input type="text" name="field_cod" required readonly 
-                       onfocus="this.removeAttribute('readonly');" 
-                       autocomplete="new-password" placeholder="Tu respuesta">
+                <label class="q-label">Correo Electrónico:</label>
+                <span class="q-desc">Aquí te llegará tu número de orden de abordaje.</span>
+                <input type="email" id="correo-estudiante" name="field_email" required readonly onfocus="this.removeAttribute('readonly');" placeholder="ejemplo@unac.edu.pe">
             </div>
 
             <div class="card">
-                <label class="q-label">DNI:</label>
-                <input type="text" name="field_dni" required readonly 
-                       onfocus="this.removeAttribute('readonly');" 
-                       autocomplete="new-password" placeholder="Tu respuesta">
+                <label class="q-label">Código de Estudiante:</label>
+                <span class="q-desc">Debe contener exactamente 10 dígitos numéricos.</span>
+                <input type="text" name="field_cod" required pattern="\d{10}" maxlength="10" title="Debe contener exactamente 10 números" readonly onfocus="this.removeAttribute('readonly');" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Ej: 2110123456">
             </div>
 
             <div class="card">
-                <label class="q-label">FACULTAD:</label>
-                <select name="field_fac" required>
-                    <option value="" disabled selected>Selecciona tu facultad</option>
-                    <option value="FIQ">Ingeniería Química</option>
-                    <option value="FIIS">Ingeniería Industrial y de Sistemas</option>
-                    <option value="FIME">Ingeniería Mecánica</option>
-                    <option value="FIEE">Ingeniería Eléctrica</option>
-                    <option value="FCC">Ciencias Contables</option>
-                    <option value="FCA">Ciencias Administrativas</option>
-                    <option value="FCE">Economía</option>
-                    <option value="FIARN">Ambiental</option>
-                    <option value="FCS">Salud</option>
-                    <option value="FCNM">Ciencias Naturales</option>
-                </select>
+                <label class="q-label">DNI / Carnet de Extranjería:</label>
+                <span class="q-desc">Ingresa 8 dígitos (DNI) o 9 dígitos (CE).</span>
+                <input type="text" name="field_dni" required pattern="\d{8}|\d{9}" maxlength="9" title="Debe ser 8 dígitos para DNI o 9 para Extranjería" readonly onfocus="this.removeAttribute('readonly');" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Tu respuesta">
             </div>
 
-            <button type="submit" class="btn-send">ENVIAR REGISTRO</button>
+            <div class="card">
+                <label class="q-label">FACULTAD: <span style="color: red;">*</span></label>
+                <div class="radio-grid">
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCC" required> FCC</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCA"> FCA</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCE"> FCE</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIARN"> FIARN</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIQ"> FIQ</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCS"> FCS</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCED"> FCED</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIIS"> FIIS</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIME"> FIME</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIPA"> FIPA</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCNM"> FCNM</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIEE"> FIEE</label>
+                </div>
+            </div>
+
+            <button type="submit" id="btn-enviar" class="btn-send">ENVIAR REGISTRO</button>
         </form>
-        <div class="foot-info">© 2026 UNAC - MOVILIDAD DE VENTANILLA | CREADO POR EL DELEGADO</div>
+        <div class="foot-info">© 2026 UNAC - MOVILIDAD DE VENTANILLA</div>
     </div>
 
     <div id="pantalla-exito" class="container">
-        <div class="card" style="border-left-color: #4caf50;">
-            <h2>¡REGISTRO EXITOSO!</h2>
-            <p>Gracias por completar los datos. Tu posición en la lista ha sido guardada.</p>
-            <p>Se enviará la confirmación al grupo oficial de <b>WhatsApp</b>.</p>
+        <div class="card" style="border-left-color: var(--exito); text-align: center;">
+            <h2 style="color: var(--exito);">¡REGISTRO EXITOSO!</h2>
+            <h1 style="font-size: 3rem; margin: 10px 0; color: var(--azul-u);">#<span id="nro-orden-display">00</span></h1>
+            <p>Ese es tu número de orden de abordaje.</p>
+            <p>Se ha enviado una copia a: <br><b id="correo-confirmacion" style="color: var(--azul-u);"></b></p>
             <p><b>#SIGAMOSMEJORANDO</b></p>
             <p><b>ATT. DELEGADO 🫡</b></p>
         </div>
-        <div class="foot-info">© 2026 UNAC - MOVILIDAD DE VENTANILLA | CREADO POR EL DELEGADO</div>
     </div>
 
     <script>
-        // HORA DE ACTIVACIÓN: 14:50:00 (2:50 PM)
+        // CONFIGURACIÓN DE CUPOS
+        let cuposMaximos = 41;
+        let cuposOcupados = 0;
+
+        // HORA DE ACTIVACIÓN: Puedes cambiarla para tus pruebas
         const horaObjetivo = new Date();
-        horaObjetivo.setHours(14, 50, 0, 0);
+        horaObjetivo.setHours(14, 50, 0, 0); // 2:50 PM
 
         function cronometro() {
             const ahora = new Date();
             const resta = horaObjetivo - ahora;
 
+            // Si ya pasó la hora, muestra el formulario directo
             if (resta <= 0) {
                 document.getElementById('pantalla-reloj').style.display = 'none';
                 document.getElementById('pantalla-form').style.display = 'flex';
@@ -181,28 +213,51 @@
             }
         }
 
-        // BLOQUEO DE COPIAR/PEGAR GLOBAL
+        // BLOQUEO DE COPIAR/PEGAR GLOBAL (Anti-trucos)
         document.addEventListener('paste', e => {
             e.preventDefault();
-            alert("PROHIBIDO PEGAR DATOS - ESCRIBE MANUALMENTE");
+            alert("⚠️ PROHIBIDO PEGAR DATOS - ESCRIBE MANUALMENTE");
         });
 
-        // BLOQUEO DE AUTOCOMPLETADO AL CARGAR
+        // INICIALIZACIÓN
         window.onload = () => {
-            const inputs = document.querySelectorAll('input');
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
             inputs.forEach(i => {
                 i.value = ""; 
-                i.setAttribute('autocomplete', 'new-password');
+                i.setAttribute('autocomplete', 'new-password'); // Bloquea autocompletado
             });
             cronometro();
         };
 
-        // ENVÍO DEL FORMULARIO
+        // LÓGICA DE ENVÍO Y CUPOS
         document.getElementById('unacForm').onsubmit = (e) => {
             e.preventDefault();
-            document.getElementById('pantalla-form').style.display = 'none';
-            document.getElementById('pantalla-exito').style.display = 'flex';
-            window.scrollTo(0,0);
+            
+            if(cuposOcupados < cuposMaximos) {
+                cuposOcupados++;
+                let cuposRestantes = cuposMaximos - cuposOcupados;
+                
+                // Actualizar interfaz
+                document.getElementById('contador-cupos').innerText = cuposRestantes;
+                
+                // Obtener datos para la pantalla final
+                const correoIngresado = document.getElementById('correo-estudiante').value;
+                document.getElementById('nro-orden-display').innerText = cuposOcupados;
+                document.getElementById('correo-confirmacion').innerText = correoIngresado;
+
+                // Cambio de pantalla
+                document.getElementById('pantalla-form').style.display = 'none';
+                document.getElementById('pantalla-exito').style.display = 'flex';
+                window.scrollTo(0,0);
+
+                // Si se llena, deshabilitar botón para futuros (simulación)
+                if(cuposRestantes === 0) {
+                    document.getElementById('btn-enviar').disabled = true;
+                    document.getElementById('btn-enviar').innerText = "CUPOS AGOTADOS";
+                }
+            } else {
+                alert("Lo sentimos, los 41 cupos se han agotado.");
+            }
         };
     </script>
 </body>
