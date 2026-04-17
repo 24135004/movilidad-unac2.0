@@ -11,13 +11,12 @@
             --card-bg: #ffffff;
         }
 
-        /* FONDO ESPACIAL VIBRANTE (ALTO CONTRASTE) */
+        /* FONDO ESPACIAL VIBRANTE */
         body { 
             margin: 0; padding: 20px; min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
             font-family: 'Segoe UI', Tahoma, sans-serif;
             background: #050a14;
-            /* Nebulosa más brillante para que no sea opaco */
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.1) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(0, 40, 85, 0.5) 0%, transparent 50%),
@@ -25,11 +24,9 @@
             color: #333;
         }
 
-        /* CONTENEDORES PRINCIPALES */
         .pantalla { width: 100%; max-width: 650px; display: none; flex-direction: column; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ESTILO GOOGLE FORMS - TARJETAS BLANCAS PURAS */
         .card {
             background: var(--card-bg); 
             padding: 30px; 
@@ -44,7 +41,6 @@
         .header-main { border-top: 15px solid var(--unac-blue); border-left: none; text-align: center; }
         .header-main h1 { color: var(--unac-blue); margin: 0; font-size: 2rem; }
 
-        /* RELOJ DE ALTO IMPACTO */
         .reloj-container { 
             text-align: center; color: white; padding: 50px; 
             background: rgba(255,255,255,0.05); border-radius: 20px; 
@@ -52,7 +48,6 @@
         }
         #timer { font-size: 6rem; font-weight: 900; color: var(--cyan-glow); text-shadow: 0 0 20px var(--cyan-glow); }
 
-        /* FORMULARIO */
         .label-pregunta { display: block; margin-bottom: 15px; font-weight: 700; color: #202124; font-size: 1.1rem; }
         
         input[type="text"], select { 
@@ -98,40 +93,40 @@
         <form id="registroForm" autocomplete="off">
             <div class="card">
                 <label class="label-pregunta">Nombres : (MINIMO 1 NOMBRE) ,RECUERDE:</label>
-                <input type="text" name="v_nom_99" placeholder="Tu respuesta" required autocomplete="new-password" onpaste="return false">
+                <input type="text" name="n_99" placeholder="Tu respuesta" required 
+                       readonly onfocus="this.removeAttribute('readonly');"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             </div>
 
             <div class="card">
                 <label class="label-pregunta">Apellidos: (RECUERDE QUE SON 2 APELLIDOS)</label>
-                <input type="text" name="v_ape_99" placeholder="Tu respuesta" required autocomplete="new-password" onpaste="return false">
+                <input type="text" name="a_99" placeholder="Tu respuesta" required 
+                       readonly onfocus="this.removeAttribute('readonly');"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             </div>
 
             <div class="card">
                 <label class="label-pregunta">CODIGO DE ESTUDIANTE (OBLIGATORIO)</label>
-                <input type="text" name="v_cod_99" placeholder="Tu respuesta" required autocomplete="new-password" onpaste="return false">
+                <input type="text" name="c_99" placeholder="Tu respuesta" required 
+                       readonly onfocus="this.removeAttribute('readonly');"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             </div>
 
             <div class="card">
                 <label class="label-pregunta">DNI:</label>
-                <input type="text" name="v_dni_99" placeholder="Tu respuesta" required autocomplete="new-password" onpaste="return false">
+                <input type="text" name="d_99" placeholder="Tu respuesta" required 
+                       readonly onfocus="this.removeAttribute('readonly');"
+                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             </div>
 
             <div class="card">
                 <label class="label-pregunta">FACULTAD:</label>
-                <select name="v_fac_99" required>
+                <select name="f_99" required>
                     <option value="" disabled selected>Selecciona tu facultad</option>
-                    <option value="FCC">FCC</option>
-                    <option value="FCA">FCA</option>
-                    <option value="FCE">FCE</option>
-                    <option value="FIARN">FIARN</option>
-                    <option value="FIQ">FIQ</option>
-                    <option value="FCS">FCS</option>
-                    <option value="FCED">FCED</option>
-                    <option value="FIIS">FIIS</option>
-                    <option value="FIME">FIME</option>
-                    <option value="FIPA">FIPA</option>
-                    <option value="FCNM">FCNM</option>
-                    <option value="FIEE">FIEE</option>
+                    <option value="FCC">FCC</option><option value="FCA">FCA</option><option value="FCE">FCE</option>
+                    <option value="FIARN">FIARN</option><option value="FIQ">FIQ</option><option value="FCS">FCS</option>
+                    <option value="FCED">FCED</option><option value="FIIS">FIIS</option><option value="FIME">FIME</option>
+                    <option value="FIPA">FIPA</option><option value="FCNM">FCNM</option><option value="FIEE">FIEE</option>
                 </select>
             </div>
 
@@ -143,20 +138,17 @@
     <div id="success-screen" class="pantalla">
         <div class="card" style="border-left-color: #4caf50;">
             <h2>COMUNICADO</h2>
-            <p>Estimados,</p>
-            <p>Muchas gracias por completar el registro. Les informo que el <b>número de lista</b> asignado será enviado de forma personalizada al <b>correo electrónico</b> que proporcionaron. 📩✨</p>
-            <p>Estaré informando cualquier cambio a través del <b>GRUPO OFICIAL DE LA MOVILIDAD DE VENTANILLA</b>. 📱💬</p>
-            <p>¡Sigamos trabajando juntos por un mejor servicio! 🤝🚀<br><b>#SIGAMOSMEJORANDO</b></p>
-            <p>Gracias.<br><b>ATT. DELEGADO 🫡</b></p>
+            <p>Muchas gracias por completar el registro. El número de lista será enviado a su correo. 📩✨</p>
+            <p>¡Sigamos trabajando juntos! 🤝🚀<br><b>#SIGAMOSMEJORANDO</b></p>
+            <p><b>ATT. DELEGADO 🫡</b></p>
         </div>
-        <div class="footer">© 2026 UNAC - MOVILIDAD DE VENTANILLA | DELEGADO</div>
     </div>
 
     <script>
-        // CONFIGURACIÓN DE LA HORA (14:29:00)
+        // CONFIGURACIÓN DE LA HORA (14:40:00)
         function startTimer() {
             const target = new Date();
-            target.setHours(14, 29, 0, 0); // Hora exacta pedida
+            target.setHours(14, 40, 0, 0); 
 
             function update() {
                 const now = new Date();
@@ -177,7 +169,9 @@
             update();
         }
 
-        // Manejo del envío
+        // BLOQUEO TOTAL DE PEGADO (Mobile + Desktop)
+        document.addEventListener('paste', e => e.preventDefault());
+
         document.getElementById('registroForm').onsubmit = function(e) {
             e.preventDefault();
             document.getElementById('form-screen').style.display = 'none';
@@ -185,16 +179,7 @@
             window.scrollTo(0,0);
         };
 
-        // Seguridad extra contra pegado y autocompletado agresivo
-        window.onload = () => {
-            startTimer();
-            // Desactiva el autocompletado en caliente
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.setAttribute('autocomplete', 'new-password');
-                input.value = ''; // Limpia cualquier residuo
-            });
-        };
+        window.onload = startTimer;
     </script>
 </body>
 </html>
