@@ -13,9 +13,9 @@
             --gris-fondo: #f0f4f8;
         }
 
-        /* Tipografía más grande y fondo espacial animado */
+        /* Tipografía y fondo de Galaxia */
         body { 
-            background: linear-gradient(135deg, var(--azul-oscuro) 0%, #00152b 100%); 
+            background: linear-gradient(135deg, #020024 0%, #090979 50%, #00d4ff 100%);
             color: #333; 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
@@ -23,45 +23,47 @@
             overflow-x: hidden; user-select: none; font-size: 18px;
         }
 
-        /* Efecto de partículas espaciales / tecnológicas en el fondo */
+        /* Efecto de partículas espaciales / estrellas */
         .particles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
             background-image: 
-                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.4), rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 80px 130px, rgba(255,255,255,0.4), rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 150px 80px, var(--celeste), rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 220px 210px, rgba(255,255,255,0.4), rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 300px 40px, var(--celeste), rgba(0,0,0,0));
-            background-repeat: repeat; background-size: 400px 400px;
-            animation: starsAnimation 60s linear infinite;
+                radial-gradient(2px 2px at 40px 60px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 180px 130px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 250px 80px, var(--celeste), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 320px 210px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 500px 40px, var(--celeste), rgba(0,0,0,0));
+            background-repeat: repeat; background-size: 600px 600px;
+            animation: starsAnimation 40s linear infinite;
         }
-        @keyframes starsAnimation { from { background-position: 0 0; } to { background-position: -1000px 1000px; } }
+        @keyframes starsAnimation { from { background-position: 0 0; } to { background-position: -1200px 1200px; } }
 
-        /* Estilo del contador */
-        #countdown { text-align: center; color: var(--blanco); z-index: 1; }
-        .contador-titulo { font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; color: var(--celeste); font-weight: bold; }
-        #timer { font-size: 5rem; font-weight: 800; letter-spacing: 5px; text-shadow: 0 0 20px rgba(0, 174, 239, 0.5); }
-
-        /* Contenedor principal del formulario */
-        #form-container { display: none; width: 100%; max-width: 600px; z-index: 1; }
+        /* Contenedores Principales */
+        .pantalla { width: 100%; max-width: 650px; z-index: 1; display: flex; flex-direction: column; align-items: center; }
         
-        /* Cabecera del formulario */
-        .form-header {
-            background: var(--blanco); border-top: 10px solid var(--celeste);
-            padding: 30px; border-radius: 12px; margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center;
+        /* Estilo del contador */
+        #countdown-container { text-align: center; color: var(--blanco); }
+        .contador-titulo { font-size: 1.5rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; color: var(--blanco); font-weight: bold; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        #timer { font-size: 5rem; font-weight: 800; letter-spacing: 5px; text-shadow: 0 0 25px rgba(0, 212, 255, 0.8); }
+
+        /* Cabecera y Tarjetas (Estilo Google Forms) */
+        .card-blanca {
+            background: var(--blanco); padding: 30px; border-radius: 12px; margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-left: 6px solid var(--celeste);
+            width: 100%; box-sizing: border-box;
         }
+        .form-header { border-top: 10px solid var(--celeste); border-left: none; text-align: center; }
         .form-header h2 { margin: 0 0 10px 0; color: var(--azul-oscuro); font-size: 2rem; }
         .form-header p { margin: 0; color: #555; font-size: 1.1rem; }
 
-        /* Tarjetas de preguntas (Estilo Google Forms) */
-        .question-card { 
-            background: var(--blanco); padding: 25px 30px; border-radius: 12px;
-            margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border-left: 5px solid var(--celeste); transition: transform 0.2s;
-        }
-        .question-card:hover { transform: translateY(-2px); }
-        .question-card label { display: block; margin-bottom: 15px; font-size: 1.2rem; font-weight: 600; color: var(--azul-oscuro); }
+        /* Mensaje Administrativo */
+        .intro-text { font-size: 1.05rem; line-height: 1.6; color: #222; }
+        .intro-text p { margin-bottom: 12px; }
+        .intro-text strong { color: var(--azul-oscuro); }
+
+        /* Preguntas */
+        .question-card { transition: transform 0.2s; }
+        .question-card:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.5); }
+        .question-card label { display: block; margin-bottom: 15px; font-size: 1.15rem; font-weight: 700; color: var(--azul-oscuro); }
         
         /* Inputs modernos */
         input, select { 
@@ -71,7 +73,7 @@
         }
         input:focus, select:focus { border-color: var(--celeste); background: var(--blanco); box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.1); }
 
-        /* Botón tecnológico */
+        /* Botón */
         .btn { 
             width: 100%; padding: 20px; background: linear-gradient(90deg, var(--celeste), var(--azul-oscuro)); 
             border: none; border-radius: 12px; font-size: 1.3rem; font-weight: 700; cursor: pointer; 
@@ -79,46 +81,63 @@
             box-shadow: 0 8px 20px rgba(0, 174, 239, 0.4); transition: 0.3s; margin-top: 10px;
         }
         .btn:hover { background: linear-gradient(90deg, var(--azul-oscuro), var(--celeste)); box-shadow: 0 10px 25px rgba(0, 174, 239, 0.6); transform: translateY(-2px); }
+
+        /* Pie de página (Footer) */
+        .footer-copy {
+            text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.7);
+            margin-top: 30px; letter-spacing: 1px; width: 100%; font-weight: bold;
+        }
     </style>
 </head>
 <body oncontextmenu="return false" ondragstart="return false">
 
     <div class="particles"></div>
 
-    <div id="countdown">
+    <div id="countdown-container" class="pantalla">
         <div class="contador-titulo">🚀 Apertura de Sistema en:</div>
-        <div id="timer">00:01:00</div>
+        <div id="timer">00:00:00</div>
+        <div class="footer-copy">(© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .)</div>
     </div>
 
-    <div id="form-container">
-        <div class="form-header">
+    <div id="form-container" class="pantalla" style="display: none;">
+        
+        <div class="card-blanca form-header">
             <h2>🚌 Movilidad UNAC</h2>
             <p>Registro Oficial de Pasajeros - Sede Ventanilla</p>
         </div>
 
-        <form id="registroForm" autocomplete="off" spellcheck="false">
+        <div class="card-blanca intro-text">
+            <p style="text-align: center; font-size: 1.2rem;">‼️ <strong>LES MANDO MI SALUDO A TODOS USTEDES</strong> ‼️</p>
+            <p>Les envío este <strong>FORMULARIO</strong> del día de hoy <strong>15/04/2026</strong> tendrá la capacidad de <strong>40 personas</strong> y el resto será mediante su cola respectivamente.</p>
+            <p>OJO: 👁‍🗨<br><strong>QUE SUS DATOS DEBEN DE ESTAR CORRECTAMENTE CASO CONTRARIO EL SISTEMA LOS DETECTA Y NO LO VALIDARA.</strong></p>
+            <p>Por este motivo se les da plazo para poder rellenar el formulario: <strong>❕ 10 MINUTOS ❕</strong></p>
+            <p>Una vez terminado el plazo, el sistema se encargara de verificar su datos que esten de manera correcta. ✅</p>
+            <p style="text-align: right; margin-top: 20px;"><em>ATT. ADMINISTRATIVO (RUTA VENTANILLA)</em></p>
+        </div>
+
+        <form id="registroForm" autocomplete="off" spellcheck="false" style="width: 100%;">
             
-            <div class="question-card">
-                <label>👤 Nombres Completos:</label>
-                <input type="text" name="n_u_1" placeholder="Ej: Juan Pérez" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
+            <div class="card-blanca question-card">
+                <label>👤 Nombres : (MINIMO 1 NOMBRE) ,RECUERDE:</label>
+                <input type="text" name="n_u_1" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
             </div>
 
-            <div class="question-card">
-                <label>📋 Apellidos Completos:</label>
-                <input type="text" name="n_u_2" placeholder="Ej: García López" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
+            <div class="card-blanca question-card">
+                <label>📋 Apellidos: (RECUERDE QUE SON 2 APELLIDOS)</label>
+                <input type="text" name="n_u_2" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
             </div>
 
-            <div class="question-card">
-                <label>🎓 Código Estudiantil:</label>
-                <input type="text" name="n_u_3" placeholder="Ej: 21200..." autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
+            <div class="card-blanca question-card">
+                <label>🎓 CODIGO DE ESTUDIANTE (OBLIGATORIO)</label>
+                <input type="text" name="n_u_3" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
             </div>
 
-            <div class="question-card">
-                <label>🆔 Documento de Identidad (DNI):</label>
-                <input type="text" name="n_u_4" placeholder="Ingresa tus 8 dígitos" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
+            <div class="card-blanca question-card">
+                <label>🆔 DNI</label>
+                <input type="text" name="n_u_4" placeholder="Tu respuesta" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')" required>
             </div>
 
-            <div class="question-card">
+            <div class="card-blanca question-card">
                 <label>🏛️ Facultad a la que perteneces:</label>
                 <select name="facultad" required>
                     <option value="">Despliega y selecciona...</option>
@@ -137,20 +156,32 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn">✨ Confirmar Asiento</button>
+            <button type="submit" class="btn">✨ Enviar</button>
         </form>
+        <div class="footer-copy">(© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .)</div>
+    </div>
+
+    <div id="success-container" class="pantalla" style="display: none;">
+        <div class="card-blanca intro-text" style="font-size: 1.15rem; border-left: 6px solid #28a745;">
+            <p>Estimados,</p>
+            <p>Muchas gracias por completar el registro. Les informo que el <strong>número de lista</strong>, asignado según el orden en que llenaron el formulario, será enviado de forma personalizada al <strong>correo electrónico</strong> que proporcionaron en el mensaje de registro. 📩✨</p>
+            <p>Asimismo, estaré informando y resolviendo cualquier consulta o cambio respectivo a través del <strong>GRUPO OFICIAL DE LA MOVILIDAD DE VENTANILLA</strong>. 📱💬✅</p>
+            <p>¡Sigamos trabajando juntos por un mejor servicio! 🤝🚀<br><strong>#SIGAMOSMEJORANDO</strong> 📈</p>
+            <p>Gracias.<br><em>ATT. DELEGADO 🫡</em></p>
+        </div>
+        <div class="footer-copy">(© 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados - CREADO POR el DELEGADO .)</div>
     </div>
 
     <script>
-        // Lógica del Temporizador
+        // 1. Lógica del Temporizador (Configurado para las 2:00 PM / 14:00)
         function updateTimer() {
             const now = new Date();
             const target = new Date(); 
-            target.setHours(12, 53, 0, 0); // <-- Ajusta la hora de apertura aquí
+            target.setHours(14, 0, 0, 0); // 14 = 2:00 PM
             
             if (now >= target) {
-                document.getElementById('countdown').style.display = 'none';
-                document.getElementById('form-container').style.display = 'block';
+                document.getElementById('countdown-container').style.display = 'none';
+                document.getElementById('form-container').style.display = 'flex';
             } else {
                 const diff = target - now;
                 const h = Math.floor(diff/3600000).toString().padStart(2,'0');
@@ -160,14 +191,24 @@
             }
         }
         setInterval(updateTimer, 1000);
-        updateTimer(); // Ejecutar inmediatamente para evitar parpadeo inicial
+        updateTimer();
 
-        // Medidas de Seguridad Estrictas
+        // 2. Transición al Mensaje de Éxito al Enviar
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que la página recargue por defecto
+            
+            // AQUÍ PUEDES PONER TU FETCH A GOOGLE APPS SCRIPT (Opcional)
+            // fetch(SCRIPT_URL, { method: 'POST', body: new FormData(this) }).then(...)
+            
+            // Ocultar formulario y mostrar ventana de éxito
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('success-container').style.display = 'flex';
+        });
+
+        // 3. Medidas de Seguridad Estrictas
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x')) e.preventDefault();
         });
-        
-        // Bloquear pegado mediante mouse
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('paste', e => e.preventDefault());
         });
