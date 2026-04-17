@@ -5,239 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>REGISTRO OFICIAL - MOVILIDAD UNAC</title>
     <style>
-        /* --- VARIABLES DE COLOR CORPORATIVO --- */
         :root { 
-            --unac-azul: #002D62; 
-            --unac-oro: #D4AF37; 
-            --unac-rojo: #C62828;
+            --azul-u: #002855; 
+            --celeste-u: #00e5ff; 
             --blanco: #ffffff; 
-            --fondo-gris: #f4f7f6;
-            --texto-oscuro: #2c3e50;
+            --error: #d93025;
+            --exito: #1e8e3e;
+            --gris-f: #f8f9fa;
         }
 
-        /* --- CONFIGURACIÓN BASE Y ANTI-SELECCIÓN --- */
+        /* ANTI-SELECCIÓN GLOBAL */
         * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none; /* Bloquea menú en iOS */
         }
 
         body { 
             margin: 0; padding: 0; min-height: 100vh;
             display: flex; justify-content: center; align-items: center;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            color: var(--texto-oscuro); 
-            overflow-x: hidden;
-            
-            /* BLOQUEO DE SELECCIÓN DE TEXTO EN EL CUERPO */
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+            background: linear-gradient(135deg, #001a33 0%, #002855 100%);
+            color: #333; overflow-x: hidden;
         }
 
-        /* PERMITIR ESCRITURA SOLO EN LOS INPUTS */
-        input, button {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        /* --- CONTENEDORES PRINCIPALES --- */
         .container { 
-            width: 95%; max-width: 600px; z-index: 10; display: none; 
-            flex-direction: column; align-items: center;
-            animation: fadeIn 0.6s ease-out;
-            margin: 20px 0;
+            width: 90%; max-width: 650px; z-index: 10; display: none; 
+            flex-direction: column; align-items: center; text-align: center;
+            animation: fadeIn 0.8s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- PANTALLA DE ESPERA (RELOJ) --- */
+        /* DISEÑO DE LA VENTANA DE ESPERA */
         .intro-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 20px;
-            border-radius: 16px;
-            text-align: center;
-            color: var(--blanco);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 24px;
+            color: white;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             width: 100%;
         }
 
-        .intro-card h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--unac-oro); text-transform: uppercase; }
-        .intro-card h2 { font-size: 1.2rem; margin: 0 0 20px 0; font-weight: 300; opacity: 0.9; }
-        .intro-card p { font-size: 1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 30px; }
+        .intro-card h1 { font-size: 1.8rem; margin: 0; letter-spacing: 1px; color: var(--celeste-u); }
+        .intro-card h2 { font-size: 1.4rem; margin: 5px 0 20px 0; font-weight: 400; }
+        .intro-card p { font-size: 1.05rem; line-height: 1.6; opacity: 0.9; margin-bottom: 25px; }
 
         .timer-box {
-            background: rgba(0, 45, 98, 0.6);
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--unac-oro);
+            border-radius: 15px;
             display: inline-block;
-            min-width: 280px;
+            border: 2px solid var(--celeste-u);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
 
-        .timer-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--unac-oro); font-weight: bold; margin-bottom: 10px; display: block;}
-        #reloj { font-size: 4rem; font-weight: 700; font-family: 'Courier New', monospace; letter-spacing: 2px; line-height: 1; }
+        .timer-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; color: var(--celeste-u); font-weight: bold;}
+        
+        #reloj { 
+            font-size: 4.5rem; font-weight: 800; font-family: 'Monaco', 'Courier New', monospace; 
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
 
-        /* --- ESTILOS DEL FORMULARIO --- */
+        /* ESTILO FORMULARIO PROFESIONAL */
         .card {
             background: var(--blanco); padding: 25px 30px; border-radius: 12px; margin-bottom: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); border-top: 6px solid var(--unac-azul);
-            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); border-top: 8px solid var(--celeste-u);
+            width: 100%; box-sizing: border-box; text-align: left;
         }
-        
-        .header-top { border-top: 8px solid var(--unac-oro); text-align: center; padding: 20px; }
-        .header-top h1 { color: var(--unac-azul); margin: 0; font-size: 1.6rem; }
+        .header-top { border-top: 12px solid var(--azul-u); text-align: center; }
+        .header-top h1 { color: var(--azul-u); margin: 0; font-size: 1.8rem; }
 
-        .info-alert { border-top-color: var(--unac-rojo); background-color: #fff8f8; text-align: center; }
-        .info-alert p { margin: 8px 0; font-size: 0.95rem; }
-
-        .q-label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 1.05rem; }
-        .q-desc { font-size: 0.8rem; color: #666; margin-bottom: 12px; display: block; }
+        .q-label { display: block; margin-bottom: 8px; font-weight: 700; color: #202124; font-size: 1.1rem; }
+        .q-desc { font-size: 0.85rem; color: #5f6368; margin-bottom: 15px; display: block; }
         
-        /* ESTILO DE INPUTS */
+        /* INPUTS - AQUÍ PERMITIMOS ESCRITURA PERO NO COPIADO */
         input[type="text"], input[type="email"] { 
-            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #ccc;
-            font-size: 1.1rem; outline: none; background: transparent; transition: border-color 0.3s;
-            font-family: inherit; color: var(--texto-oscuro);
+            width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid #dadce0;
+            font-size: 1.1rem; outline: none; background: transparent; transition: 0.3s;
+            -webkit-user-select: text; user-select: text; /* Permite escribir pero las funciones de arriba bloquean pegar */
         }
-        input:focus { border-bottom: 2px solid var(--unac-azul); }
-        input::placeholder { color: #aaa; font-style: italic; font-size: 0.95rem; }
+        input:focus { border-bottom: 2px solid var(--azul-u); }
 
-        /* ESTILO DE RADIOS (FACULTADES) */
         .radio-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 15px; margin-top: 15px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px; margin-top: 10px;
         }
-        .radio-label { 
-            display: flex; align-items: center; cursor: pointer; font-size: 0.9rem; font-weight: 500;
-            background: var(--fondo-gris); padding: 10px; border-radius: 8px; transition: 0.2s;
-        }
-        .radio-label:hover { background: #e0e0e0; }
-        .radio-label input { margin-right: 8px; accent-color: var(--unac-azul); transform: scale(1.2); }
+        .radio-label { display: flex; align-items: center; cursor: pointer; font-size: 0.95rem; }
+        .radio-label input { margin-right: 8px; accent-color: var(--azul-u); }
 
-        /* BOTÓN DE ENVÍO */
         .btn-send { 
-            width: 100%; padding: 16px; background: var(--unac-azul); color: var(--blanco);
-            border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; letter-spacing: 1px;
-            cursor: pointer; transition: background 0.3s; margin-top: 10px;
+            width: 100%; padding: 18px; background: var(--azul-u); color: white;
+            border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px;
         }
-        .btn-send:hover { background: #001f44; }
+        .btn-send:hover { background: #003b7a; }
 
-        .foot-info { text-align: center; color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 20px; }
+        .foot-info { text-align: center; color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 25px; font-weight: bold; }
 
-        /* --- ADAPTACIÓN PARA CELULARES (RESPONSIVE) --- */
         @media (max-width: 480px) {
-            .card { padding: 20px; }
-            #reloj { font-size: 3.2rem; }
+            #reloj { font-size: 3rem; }
             .intro-card h1 { font-size: 1.5rem; }
-            .header-top h1 { font-size: 1.3rem; }
-            .radio-grid { grid-template-columns: repeat(3, 1fr); }
+            .radio-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
     <div id="pantalla-reloj" class="container" style="display: flex;">
         <div class="intro-card">
             <h1>Movilidad Universitaria</h1>
-            <h2>Ruta Ventanilla - UNAC</h2>
-            <p>Servicio exclusivo de traslado hacia el Campus Universitario para el Ciclo 2026-A.</p>
-            
+            <h2>Ruta Ventanilla</h2>
+            <p>La UNAC pone a disposición de sus estudiantes el servicio de movilidad (Ciclo 2026-A).</p>
             <div class="timer-box">
-                <span class="timer-label">El formulario se abre en:</span>
+                <span class="timer-label">Apertura del formulario en:</span>
                 <div id="reloj">00:00:00</div>
             </div>
         </div>
-        <div class="foot-info">© 2026 UNAC - Todos los derechos reservados</div>
+        <div class="foot-info">© 2026 UNAC - MOVILIDAD DE VENTANILLA</div>
     </div>
 
     <div id="pantalla-form" class="container">
         <div class="card header-top">
-            <h1>🚌 REGISTRO DE MOVILIDAD 🚌</h1>
+            <h1>🚌 REGISTRO MOVILIDAD UNAC 🚌</h1>
         </div>
 
-        <div class="card info-alert">
-            <p style="font-weight: bold; color: var(--unac-rojo);">‼️ ATENCIÓN ESTUDIANTE ‼️</p>
-            <p>Capacidad máxima: <b>41 personas</b> por bus.</p>
-            <p style="font-size: 0.85rem; color: #555;">El ingreso de datos falsos o copiar/pegar información anulará la inscripción automáticamente.</p>
+        <div class="card" style="border-top-color: #fbbc04;">
+            <p style="text-align: center; font-weight: bold;">‼️ ATENCIÓN ESTUDIANTE ‼️</p>
+            <p>Registro oficial: <b>15/04/2026</b>. Capacidad máxima: <b>41 personas</b>.</p>
         </div>
 
-        <form id="unacForm" autocomplete="nope">
-            
+        <form id="unacForm" autocomplete="off">
             <div class="card">
-                <label class="q-label">Nombres Completos:</label>
-                <input type="text" name="data_n" required 
-                       autocomplete="new-password" 
-                       readonly onfocus="this.removeAttribute('readonly');" 
-                       onpaste="return false;" oncopy="return false;" oncut="return false;" ondrop="return false;"
-                       placeholder="Escribe tus nombres">
+                <label class="q-label">Nombres:</label>
+                <input type="text" name="field_nom" required 
+                onpaste="return false;" oncopy="return false;" oncut="return false;"
+                autocomplete="off" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="q-label">Apellidos Completos:</label>
-                <input type="text" name="data_a" required 
-                       autocomplete="new-password" 
-                       readonly onfocus="this.removeAttribute('readonly');" 
-                       onpaste="return false;" oncopy="return false;" oncut="return false;" ondrop="return false;"
-                       placeholder="Escribe tus apellidos">
+                <label class="q-label">Apellidos:</label>
+                <input type="text" name="field_ape" required 
+                onpaste="return false;" oncopy="return false;" oncut="return false;"
+                autocomplete="off" placeholder="Tu respuesta">
             </div>
 
             <div class="card">
-                <label class="q-label">Correo Electrónico Institucional:</label>
-                <span class="q-desc">Aquí recibirás tu ticket de abordaje.</span>
-                <input type="email" id="correo-estudiante" name="data_e" required 
-                       autocomplete="new-password" 
-                       readonly onfocus="this.removeAttribute('readonly');" 
-                       onpaste="return false;" oncopy="return false;" oncut="return false;" ondrop="return false;"
-                       placeholder="ejemplo@unac.edu.pe">
+                <label class="q-label">Correo Institucional:</label>
+                <input type="email" id="correo-estudiante" name="field_email" required 
+                onpaste="return false;" oncopy="return false;" oncut="return false;"
+                autocomplete="off" placeholder="ejemplo@unac.edu.pe">
             </div>
 
             <div class="card">
                 <label class="q-label">Código de Estudiante:</label>
-                <input type="text" name="data_c" required pattern="\d{10}" maxlength="10" 
-                       autocomplete="new-password"
-                       readonly onfocus="this.removeAttribute('readonly');" 
-                       oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-                       onpaste="return false;" oncopy="return false;" oncut="return false;" ondrop="return false;"
-                       placeholder="10 dígitos">
+                <input type="text" name="field_cod" required pattern="\d{10}" maxlength="10" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                onpaste="return false;" oncopy="return false;" oncut="return false;"
+                autocomplete="off" placeholder="10 dígitos">
             </div>
 
             <div class="card">
                 <label class="q-label">DNI / Carnet de Extranjería:</label>
-                <input type="text" name="data_d" required pattern="\d{8}|\d{9}" maxlength="9" 
-                       autocomplete="new-password"
-                       readonly onfocus="this.removeAttribute('readonly');" 
-                       oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-                       onpaste="return false;" oncopy="return false;" oncut="return false;" ondrop="return false;"
-                       placeholder="8 o 9 números">
+                <input type="text" name="field_dni" required pattern="\d{8}|\d{9}" maxlength="9" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                onpaste="return false;" oncopy="return false;" oncut="return false;"
+                autocomplete="off" placeholder="8 o 9 números">
             </div>
 
             <div class="card">
-                <label class="q-label">Facultad a la que perteneces: <span style="color:red">*</span></label>
+                <label class="q-label">FACULTAD: <span style="color:red">*</span></label>
                 <div class="radio-grid">
-                    <label class="radio-label"><input type="radio" name="facultad" value="FCC" required> FCC</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FCA"> FCA</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FCE"> FCE</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FIARN"> FIARN</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FIQ"> FIQ</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FCS"> FCS</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FCED"> FCED</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FIIS"> FIIS</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FIME"> FIME</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FIPA"> FIPA</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FCNM"> FCNM</label>
-                    <label class="radio-label"><input type="radio" name="facultad" value="FIEE"> FIEE</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCC" required> FCC</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCA"> FCA</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCE"> FCE</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIARN"> FIARN</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIQ"> FIQ</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCS"> FCS</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCED"> FCED</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIIS"> FIIS</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIME"> FIME</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIPA"> FIPA</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FCNM"> FCNM</label>
+                    <label class="radio-label"><input type="radio" name="field_fac" value="FIEE"> FIEE</label>
                 </div>
             </div>
 
@@ -246,85 +204,67 @@
     </div>
 
     <div id="pantalla-exito" class="container">
-        <div class="card header-top" style="border-top-color: #1e8e3e;">
-            <h2 style="color: #1e8e3e; margin: 0;">¡REGISTRO EXITOSO!</h2>
-        </div>
-        <div class="card" style="text-align: center;">
-            <p style="font-size: 1.2rem; color: #555; margin-bottom: 0;">Tu número de orden es:</p>
-            <h1 style="font-size: 4.5rem; color: var(--unac-azul); margin: 10px 0;">#<span id="nro-orden-display">00</span></h1>
-            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-            <p style="font-size: 0.95rem;">Se envió la confirmación a: <br><b id="correo-confirmacion" style="color: var(--unac-azul);"></b></p>
-            <p style="background: var(--fondo-gris); padding: 15px; border-radius: 8px; font-weight: bold; font-size: 0.9rem;">Toma una captura de pantalla y presenta este número al abordar. 🫡</p>
+        <div class="card" style="text-align: center; border-top-color: var(--exito);">
+            <h2 style="color: var(--exito);">¡REGISTRO EXITOSO!</h2>
+            <h1 style="font-size: 3.5rem; color: var(--azul-u);">#<span id="nro-orden-display">00</span></h1>
+            <p>Se envió la confirmación a: <br><b id="correo-confirmacion"></b></p>
         </div>
     </div>
 
     <script>
-        /* =========================================================================
-           1. CONFIGURACIÓN DE LA HORA DE APERTURA DEL FORMULARIO
-           ========================================================================= */
-        // Cambia estas dos variables a la hora y minuto que desees (Formato 24 horas)
-        const HORA_APERTURA = 15; // Ejemplo: 15 para las 3 PM, 8 para las 8 AM
-        const MINUTO_APERTURA = 10; // Ejemplo: 10 para los 10 minutos
+        /* =========================================
+           CONFIGURACIÓN: EDITA AQUÍ LA HORA
+           ========================================= */
+        const HORA_H = 15; // 3 PM
+        const MINUTO_M = 10; // :10 AM
         
-        // No toques esto: Configura el reloj automáticamente para el día de hoy
         const horaObjetivo = new Date();
-        horaObjetivo.setHours(HORA_APERTURA, MINUTO_APERTURA, 0, 0);
-
-        /* =========================================================================
-           2. LÓGICA DEL RELOJ Y FORMULARIO
-           ========================================================================= */
-        let cuposOcupados = 0;
+        horaObjetivo.setHours(HORA_H, MINUTO_M, 0, 0);
 
         function cronometro() {
             const ahora = new Date();
             const resta = horaObjetivo - ahora;
 
-            // Si ya pasó la hora estipulada, muestra el formulario directo
             if (resta <= 0) {
+                // Habilitar formulario, ocultar reloj
                 document.getElementById('pantalla-reloj').style.display = 'none';
                 document.getElementById('pantalla-form').style.display = 'flex';
             } else {
-                // Cálculos del tiempo restante
-                const h = Math.floor(resta / 3600000).toString().padStart(2, '0');
-                const m = Math.floor((resta % 3600000) / 60000).toString().padStart(2, '0');
-                const s = Math.floor((resta % 60000) / 1000).toString().padStart(2, '0');
-                
+                const h = Math.floor(resta/3600000).toString().padStart(2,'0');
+                const m = Math.floor((resta%3600000)/60000).toString().padStart(2,'0');
+                const s = Math.floor((resta%60000)/1000).toString().padStart(2,'0');
                 document.getElementById('reloj').innerText = `${h}:${m}:${s}`;
                 requestAnimationFrame(cronometro);
             }
         }
 
-        // BLOQUEO MEDIANTE TECLADO (Atajos Ctrl+C, Ctrl+V, etc)
-        document.addEventListener('keydown', function(e) {
-            // Prevenir Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+U, F12
-            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x' || e.key === 'u' || e.key === 'a')) {
+        /* BLOQUEOS EXTREMOS PARA PC Y MÓVIL */
+        // Bloquea atajos de teclado (Ctrl+C, Ctrl+V, etc.)
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'x' || e.key === 'a')) {
                 e.preventDefault();
-            }
-            if (e.key === 'F12') {
-                e.preventDefault();
+                alert("⚠️ POR SEGURIDAD, ESCRIBA SUS DATOS MANUALMENTE.");
             }
         });
 
-        // ENVÍO DEL FORMULARIO
+        // Bloqueo de Pegado en móviles (segunda capa)
+        document.addEventListener('paste', e => e.preventDefault());
+
+        let cuposOcupados = 0;
         document.getElementById('unacForm').onsubmit = (e) => {
             e.preventDefault();
             if(cuposOcupados < 41) {
                 cuposOcupados++;
-                // Formatear el número (ej: de 1 a 01)
-                const numeroVisual = cuposOcupados.toString().padStart(2, '0');
-                
-                document.getElementById('nro-orden-display').innerText = numeroVisual;
+                document.getElementById('nro-orden-display').innerText = cuposOcupados.toString().padStart(2, '0');
                 document.getElementById('correo-confirmacion').innerText = document.getElementById('correo-estudiante').value;
-                
                 document.getElementById('pantalla-form').style.display = 'none';
                 document.getElementById('pantalla-exito').style.display = 'flex';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo(0,0);
             } else {
-                alert("⚠️ LO SENTIMOS, LOS CUPOS SE HAN AGOTADO.");
+                alert("Cupos agotados.");
             }
         };
 
-        // Iniciar al cargar la página
         window.onload = cronometro;
     </script>
 </body>
